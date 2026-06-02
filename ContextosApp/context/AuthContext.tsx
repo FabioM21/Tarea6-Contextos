@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
+// Tipos y contexto de autenticación global
+// solo estos dos roles se solicitan en la app
 type Role = 'admin' | 'common';
 
 interface AuthContextType {
@@ -9,6 +11,7 @@ interface AuthContextType {
   logout: () => void;
 }
 
+// Creamos el contexto, arranca en null hasta que el Provider lo inicialice
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = (): AuthContextType => {
@@ -23,6 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [role, setRole] = useState<Role | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+  // Guarda el rol elegido y marca la sesión como activa
   const login = (selectedRole: Role): void => {
     setRole(selectedRole);
     setIsLoggedIn(true);

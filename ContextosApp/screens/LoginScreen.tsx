@@ -9,11 +9,12 @@ import {
 import { useAuth } from '../context/AuthContext';
 type Role = 'admin' | 'common';
 const LoginScreen = () => {
+  // Navegación principal: decide si mostrar Login o las Tabs
   const [selectedRole, setSelectedRole] = useState<Role | null>(null);
   const { login } = useAuth();
   const handleLogin = (): void => {
     if (!selectedRole) {
-      Alert.alert('Atención', 'Por favor selecciona un rol antes de ingresar.');
+      Alert.alert('Por favor selecciona un rol antes de ingresar.');
       return;
     }
     login(selectedRole);
